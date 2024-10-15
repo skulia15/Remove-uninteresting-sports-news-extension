@@ -1,13 +1,18 @@
 {
   "manifest_version": 3,
-  "name": "Remove Football Articles on DV.is",
+  "name": "Remove Football Articles on DV.is and Visir.is",
   "version": "1.0",
-  "description": "Removes all football articles from dv.is.",
+  "description": "Removes all football articles from dv.is and visir.is.",
   "permissions": ["scripting"],
   "content_scripts": [
     {
-      "matches": ["https://www.dv.is/*", "https://dv.is/*"],
-      "js": ["remove-football.js"],
+      "matches": [
+        "https://www.dv.is/*",
+        "https://dv.is/*",
+        "https://www.visir.is/*",
+        "https://visir.is/*"
+      ],
+      "js": ["content.js"],
       "run_at": "document_end"
     }
   ]
