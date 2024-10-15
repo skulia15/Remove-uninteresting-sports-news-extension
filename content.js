@@ -13,7 +13,6 @@ function removeElements(selector, conditionFn, logMessage) {
 
 // Function to handle removal on dv.is
 function removeGreinElements() {
-  // Select all elements with class 'grein'
   removeElements(
     ".grein",
     (element) => element.querySelector(".flokkur.f_433"),
@@ -34,7 +33,6 @@ function removeSportsArticlesVisir() {
       ];
       let textContent = "";
 
-      // Check for .dre-item__footer
       const footer = element.querySelector(".dre-item__footer");
       if (footer) {
         textContent = footer.textContent.trim();
@@ -43,7 +41,6 @@ function removeSportsArticlesVisir() {
         }
       }
 
-      // Check for .badge.badge--tag.-sport
       const badge = element.querySelector(".badge.badge--tag.-sport");
       if (badge) {
         textContent = badge.textContent.trim();
@@ -58,9 +55,10 @@ function removeSportsArticlesVisir() {
   );
 }
 
+// Function to handle removal on mbl.is
 function removeArticlesMbl() {
   removeElements(
-    "div.img-inline-text-top, div.media.smt",
+    'div[class*="teaser"], div[class*="media"], div[class*="img-inline-text"], div.subcat-box, div[class*="col-"]',
     (element) => {
       const pathsToRemove = [
         "/sport/enski",
@@ -117,19 +115,16 @@ function main() {
   }
 }
 
-// Run the main function once the DOM is fully loaded
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", main);
 } else {
   main();
 }
 
-// Set up a MutationObserver to handle dynamically loaded content
 const observer = new MutationObserver(() => {
   main();
 });
 
-// Start observing the document body for changes
 if (document.body) {
   observer.observe(document.body, { childList: true, subtree: true });
 }
