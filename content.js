@@ -27,6 +27,7 @@ function removeSportsArticlesVisir() {
     (element) => {
       const sportsToRemove = [
         "Fótbolti",
+        "Íslenski boltinn",
         "Körfubolti",
         "Enski boltinn",
         "Körfuboltakvöld",
@@ -52,6 +53,53 @@ function removeSportsArticlesVisir() {
       return false;
     },
     "Removed an <article> element containing specified sports on visir.is."
+  );
+}
+
+// Function to remove specific sections on visir.is based on categories
+function removeCategorySectionsVisir() {
+  removeElements(
+    "div.col-xs-12.col-sm-12.col-md-4",
+    (element) => {
+      const articlesList = element.querySelector("div.articles-list");
+      if (articlesList) {
+        // Get the category header
+        const categoryHeader = articlesList.querySelector("h2.sans");
+        if (categoryHeader) {
+          // Extract text nodes from h2.sans
+          const categoryText = Array.from(categoryHeader.childNodes)
+            .filter((node) => node.nodeType === Node.TEXT_NODE)
+            .map((node) => node.textContent.trim())
+            .join(" ");
+
+          const categoriesToRemove = [
+            "Fótbolti",
+            "Körfubolti",
+            "Besta deild karla",
+            "Besta deild kvenna",
+            "Enski boltinn",
+            "Olís-deild karla",
+            "Olís-deild kvenna",
+            "NFL",
+            "Subway-deild karla",
+            "Subway-deild kvenna",
+            "EM í fótbolta 2024",
+            "Golf",
+            "NBA",
+            "Meistaradeildin",
+            "Íslenski boltinn",
+            "Frjálsar íþróttir",
+            "MMA",
+          ];
+
+          if (categoriesToRemove.includes(categoryText)) {
+            return true; // Remove the parent div.col-xs-12.col-sm-12.col-md-4
+          }
+        }
+      }
+      return false;
+    },
+    "Removed a category section on visir.is."
   );
 }
 
@@ -94,7 +142,7 @@ function removeArticlesRuv() {
   );
 }
 
-// Main function to determine the current site and execute the appropriate removal functions
+// Determine the current site and execute the appropriate removal functions
 function main() {
   const hostname = window.location.hostname;
 
@@ -104,6 +152,7 @@ function main() {
 
   if (hostname.includes("visir.is")) {
     removeSportsArticlesVisir();
+    removeCategorySectionsVisir();
   }
 
   if (hostname.includes("ruv.is")) {
