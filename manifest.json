@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Remove Football Articles on DV.is",
+  "version": "1.0",
+  "description": "Removes all football articles from dv.is.",
+  "permissions": ["scripting"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.dv.is/*", "https://dv.is/*"],
+      "js": ["remove-football.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
