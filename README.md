@@ -1,56 +1,83 @@
-# Remove Specific Articles on DV.is and Visir.is
+# Uninteresting Sport News Filter Extension
 
 ## Overview
 
-**Remove Specific Articles on DV.is and Visir.is** is a lightweight Chrome extension designed to enhance your browsing experience on [dv.is](https://www.dv.is) and [visir.is](https://www.visir.is) by automatically removing unwanted news articles. Specifically, it targets and removes:
+**Article Filter Extension** is a lightweight Chrome extension designed to enhance your browsing experience by automatically removing news articles for uninteresting sports, such as football, basketball, golf, and horsesports from the main Icelandic news websites. **
 
-1. **On DV.is:**
-   - All HTML elements with the class `grein` that contain a child element with the class `flokkur f_433`.
+## Supported Websites
 
-2. **On Visir.is:**
-   - All `<article>` elements where the `.dre-item__footer` contains the text `"Fótbolti"`.
+- [dv.is](https://www.dv.is)
+- [visir.is](https://www.visir.is)
+- [ruv.is](https://www.ruv.is)
+- [mbl.is](https://www.mbl.is)
 
-This helps declutter the webpages, allowing you to focus on the content that matters most to you.
+## What It Does
 
-## Features
+The extension removes articles based on predefined criteria:
 
-- **Selective Content Removal:**
-  - **DV.is:** Removes elements with class `grein` containing a child with class `flokkur f_433`.
-  - **Visir.is:** Removes `<article>` elements with `.dre-item__footer` containing `"Fótbolti"`.
+- **dv.is**: Removes articles with the class `grein` containing a child with the class `flokkur f_433`.
 
-- **Automatic Execution:** Runs automatically on every relevant page within the `dv.is` and `visir.is` domains without requiring manual activation.
+- **visir.is**: Removes `<article>` elements where:
 
-- **Real-Time Monitoring:** Utilizes a `MutationObserver` to detect and remove targeted elements even if they are dynamically loaded after the initial page load.
+  - `.dre-item__footer` contains the text `"Fótbolti"`, `"Körfubolti"`, or `"Enski boltinn"`.
 
-- **Lightweight:** Minimal impact on browser performance, ensuring a smooth browsing experience.
+  - `.badge.badge--tag.-sport` contains the text `"Fótbolti"`, `"Körfubolti"`, or `"Enski boltinn"`.
 
-## How It Works
+- **ruv.is**: Removes articles where the `data-topic` attribute is `"Fótbolti"` or `"Körfubolti"`.
 
-The extension operates by injecting a single content script into every webpage under the `dv.is` and `visir.is` domains. This script performs the following actions:
+- **mbl.is**: Removes articles containing links that start with:
 
-1. **Initial Removal:**
-   - **DV.is:**
-     - Upon page load (`document_end`), the script searches for all elements with the class `grein`.
-     - For each `grein` element found, it checks if it contains a child element with the class `flokkur f_433`.
-     - If such a child is present, the entire `grein` element is removed from the DOM.
-   
-   - **Visir.is:**
-     - Upon page load (`document_end`), the script searches for all `<article>` elements with the class `dre-item`.
-     - For each `<article>` element found, it checks if it contains a child element with the class `.dre-item__footer` that has the text `"Fótbolti"`.
-     - If such a condition is met, the `<article>` element is removed from the DOM.
-
-2. **Dynamic Monitoring:**
-   - A `MutationObserver` is set up to monitor changes to the DOM.
-   - If new elements are added to the page that match the removal criteria, the observer ensures they are promptly removed.
-
-This dual approach ensures that both static and dynamically loaded content are handled effectively.
+  - `/sport/enski`
+  - `/sport/efstadeild`
+  - `/sport/fotbolti`
+  - `/sport/korfubolti`
+  - `/sport/golf`
+  - `/sport/hestar`
 
 ## Installation
 
-Follow these steps to install the **Remove Specific Articles on DV.is and Visir.is** Chrome extension:
+To install the extension:
 
-### 1. Clone or Download the Repository
+1. **Clone or Download the Repository:**
 
-- **Clone via Git:**
-  ```bash
-  git clone https://github.com/your-username/remove-specific-articles-extension.git
+   - **Clone via Git:**
+
+     ```bash
+     git clone https://github.com/your-username/article-filter-extension.git
+     ```
+
+   - **Or Download as ZIP:**
+
+     - Click the "Code" button on the repository page.
+
+     - Select "Download ZIP" and extract the contents to a folder on your computer.
+
+2. **Load the Extension into Chrome:**
+
+   1. Open Google Chrome.
+
+   2. Navigate to `chrome://extensions/` by typing it into the address bar and pressing Enter.
+
+   3. **Enable Developer Mode:**
+
+      - In the top-right corner of the Extensions page, toggle the **Developer mode** switch to the **on** position.
+
+   4. **Load Unpacked Extension:**
+
+      - Click on the **Load unpacked** button.
+
+      - In the file dialog that appears, navigate to and select the folder where you cloned or extracted the extension's files.
+
+   5. **Verify Installation:**
+
+      - The extension should now appear in your list of installed extensions.
+
+      - Ensure that the extension is enabled (the toggle next to it should be on).
+
+3. **You're All Set!**
+
+   - The extension will now automatically remove the specified articles when you visit the supported websites.
+
+## Usage
+
+Simply browse the supported websites as you normally would. The extension works automatically in the background, removing unwanted articles based on the predefined criteria.

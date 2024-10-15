@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Remove Football Articles on DV.is and Visir.is",
-  "version": "1.0",
-  "description": "Removes all football articles from dv.is and visir.is.",
+  "name": "Remove Specific Sports Articles on DV.is, Visir.is, mbl.is and Ruv.is",
+  "version": "1.1",
+  "description": "Removes articles about football and basketball from dv.is, visir.is, mbl.is and ruv.is",
   "permissions": ["scripting"],
   "content_scripts": [
     {
@@ -10,7 +10,11 @@
         "https://www.dv.is/*",
         "https://dv.is/*",
         "https://www.visir.is/*",
-        "https://visir.is/*"
+        "https://visir.is/*",
+        "https://www.ruv.is/*",
+        "https://ruv.is/*",
+        "https://www.mbl.is/*",
+        "https://mbl.is/*"
       ],
       "js": ["content.js"],
       "run_at": "document_end"
