@@ -58,10 +58,9 @@ function removeSportsArticlesVisir() {
   );
 }
 
-// Function to handle removal on mbl.is
 function removeArticlesMbl() {
   removeElements(
-    "div.img-inline-text-top.mb-2, div.media.smt",
+    "div.img-inline-text-top, div.media.smt",
     (element) => {
       const pathsToRemove = [
         "/sport/enski",
