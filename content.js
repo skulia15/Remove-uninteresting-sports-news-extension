@@ -21,6 +21,7 @@ function removeGreinElements() {
 }
 
 // Function to handle removal on visir.is for specified sports
+
 function removeSportsArticlesVisir() {
   removeElements(
     "article.article-item, article.dre-item",
@@ -32,20 +33,23 @@ function removeSportsArticlesVisir() {
         "Enski boltinn",
         "Körfuboltakvöld",
       ];
+
       let textContent = "";
 
+      // Check the footer for sports category text
       const footer = element.querySelector(".dre-item__footer");
       if (footer) {
         textContent = footer.textContent.trim();
-        if (sportsToRemove.includes(textContent)) {
+        if (sportsToRemove.some((sport) => textContent.includes(sport))) {
           return true;
         }
       }
 
+      // Check the badge for sports category text
       const badge = element.querySelector(".badge.badge--tag.-sport");
       if (badge) {
         textContent = badge.textContent.trim();
-        if (sportsToRemove.includes(textContent)) {
+        if (sportsToRemove.some((sport) => textContent.includes(sport))) {
           return true;
         }
       }
